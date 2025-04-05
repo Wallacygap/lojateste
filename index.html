@@ -1,180 +1,174 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>PADARIA BOM CAFÉ</title>
+<html lang="pt-BR">
+
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
-    <style>
-    body, html {
-      height: 100%;
-      font-family: "Inconsolata", sans-serif;
-    }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendas e Consertos de Aparelhos</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function copiarPIX() {
+            var texto = document.getElementById("codigoPIX");
+            texto.select();
+            texto.setSelectionRange(0, 99999); // Para dispositivos móveis
 
-    .bgimg {
-      background-position: center;
-      background-size: cover;
-      background-image: url("https://www.w3schools.com/w3images/coffeehouse.jpg");
-      min-height: 75%;
-    }
+            document.execCommand("copy"); // Comando de cópia
 
-    .menu {
-      display: none;
-    }
-    </style>
-  </head>
-<body>
+            // Exibir mensagem de confirmação
+            var mensagem = document.getElementById("mensagemCopiado");
+            mensagem.style.display = "block"; // Exibir mensagem
+            setTimeout(function () {
+                mensagem.style.display = "none"; // Esconder a mensagem após 2 segundos
+            }, 2000);
+        }
 
-<!-- Links (sit on top) -->
-<div class="w3-top">
-  <div class="w3-row w3-padding w3-black">
-    <div class="w3-col s3">
-      <a href="#" class="w3-button w3-block w3-black">NOSSA CASA</a>
-    </div>
-    <div class="w3-col s3">
-      <a href="#about" class="w3-button w3-block w3-black">SOBRE NÓS</a>
-    </div>
-    <div class="w3-col s3">
-      <a href="#menu" class="w3-button w3-block w3-black">MENU</a>
-    </div>
-    <div class="w3-col s3">
-      <a href="#where" class="w3-button w3-block w3-black">SUA LOCALIZACAO</a>
-    </div>
-  </div>
-</div>
+        // Função para capturar a localização e exibir no Google Maps
+        function obterLocalizacao() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (posicao) {
+                    var latitude = posicao.coords.latitude;
+                    var longitude = posicao.coords.longitude;
 
-<!-- Header with image -->
-<header class="bgimg w3-display-container w3-grayscale-min" id="home">
-  <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
-    <span class="w3-tag">Open from 6am to 5pm</span>
-  </div>
-  <div class="w3-display-middle w3-center">
-    <span class="w3-text-white" style="font-size:90px">NOSSO<br>CAFÉ</span>
-  </div>
-  <div class="w3-display-bottomright w3-center w3-padding-large">
-    <span class="w3-text-white">15 AV. PAULISTA MORUM, 2025</span>
-  </div>
-</header>
+                    // Exibir o mapa com a localização
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        center: { lat: latitude, lng: longitude },
+                        zoom: 15
+                    });
 
-<!-- Add a background color and large text to the whole page -->
-<div class="w3-sand w3-grayscale w3-large">
+                    var marker = new google.maps.Marker({
+                        position: { lat: latitude, lng: longitude },
+                        map: map,
+                        title: "Sua Localização"
+                    });
 
-<!-- About Container -->
-<div class="w3-container" id="about">
-  <div class="w3-content" style="max-width:700px">
-    <h5 class="w3-center w3-padding-64"><span class="w3-tag w3-wide">CAFE DA CASA</span></h5>
-    <p>O Café foi fundado em Sao paulo pelo Sr. Leonardo Amendola, com o objetivo de mostra o que é um cafe da manha para as pessoas, Sr. Leonardo e um pessoa boa de coracao fazendo doacoes de comida e bebidas para pessoas sem teto.</p>
-    <p>Além do nosso menu completo de café expresso e bar de cerveja, servimos sanduíches frescos de café da manhã e almoço feitos na hora, bem como uma seleção de acompanhamentos e saladas e outras coisas boas.</p>
-    <div class="w3-panel w3-leftbar w3-light-grey">
-      <p><i>"Use produtos da natureza para o que vale a pena - mas nunca muito cedo, nem tarde demais." Fresco é o novo doce.</i></p>
-      <p>Chef, cafeteiro e proprietário: Marcos Souzam</p>
-    </div>
-    <img src="https://www.w3schools.com/w3images/coffeeshop.jpg" style="width:100%;max-width:1000px" class="w3-margin-top">
-    <p><strong>Opening hours:</strong> everyday from 6am to 5pm.</p>
-    <p><strong>Endereco:</strong> Av. Paulista morum, 2025, SP</p>
-  </div>
-</div>
+                    // Exibir as coordenadas da localização
+                    document.getElementById("localizacao").innerHTML =
+                        "Latitude: " + latitude + "<br>Longitude: " + longitude;
+                }, function () {
+                    alert("Não foi possível obter sua localização.");
+                });
+            } else {
+                alert("Geolocalização não é suportada por este navegador.");
+            }
+        }
+    </script>
+</head>
 
-<!-- Menu Container -->
-<div class="w3-container" id="menu">
-  <div class="w3-content" style="max-width:700px">
- 
-    <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">MENU DO DIA</span></h5>
-  
-    <div class="w3-row w3-center w3-card w3-padding">
-      <a href="javascript:void(0)" onclick="openMenu(event, 'Eat');" id="myLink">
-        <div class="w3-col s6 tablink">Comidas</div>
-      </a>
-      <a href="javascript:void(0)" onclick="openMenu(event, 'Drinks');">
-        <div class="w3-col s6 tablink">Drinks</div>
-      </a>
-    </div>
+<body onload="obterLocalizacao()"> <!-- Chama a função ao carregar a página -->
+    <header>
+        <div class="logo">
+            <h1>Aparelhos Soluções</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#produtos">Produtos</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div id="Eat" class="w3-container menu w3-padding-48 w3-card">
-      <h5>Cookies</h5>
-      <p class="w3-text-grey">Cookies romeu e julieta 5.50</p><br>
-    
-      <h5>Salada de Frutas</h5>
-      <p class="w3-text-grey">Saladas de frutas ou frutas secas 7.00</p><br>
-    
-      <h5>Sucos</h5>
-      <p class="w3-text-grey">Suco del vale 7.50</p><br>
-    
-      <h5>Completos</h5>
-      <p class="w3-text-grey">Cafe completo (sua montagem) 50</p><br>
-      <p class="w3-text-grey">Cafe da manha com (ovos, bacons, salada) 25</p><br>
-      <p class="w3-text-grey">Cafe da tarde (bolos, coxinhas, saduiches, entre outros) 20</p><br>
-    
-      <h5>Blueberry Pancakes</h5>
-      <p class="w3-text-grey">Chocolates, fini gigante, caixa de bombons, sorvetes, cones, trufas, etc 9.50</p>
-    </div>
+    <section id="home" class="home">
+        <h2>Bem-vindo à Aparelhos Soluções</h2>
+        <p>Somos especialistas em vendas e consertos de aparelhos eletrônicos. Oferecemos uma ampla gama de produtos e
+            serviços para manter seus aparelhos sempre funcionando!</p>
+    </section>
 
-    <div id="Drinks" class="w3-container menu w3-padding-48 w3-card">
-      <h5>Cafe</h5>
-      <p class="w3-text-grey">Cafe puro ou cafe doce 2.50</p><br>
-    
-      <h5>Chocolate</h5>
-      <p class="w3-text-grey">Chocolate quente 4.50</p><br>
-      <p class="w3-text-grey">Chocolate com leite 3.50</p><br>
-      <p class="w3-text-grey">Chocolate cremoso 9.00</p><br>
-      
-      <h5>Corretto</h5>
-      <p class="w3-text-grey">Cafe com Whiskey 5.00</p><br>
-    
-      <h5>Tipos de cafe com leite</h5>
-      <p class="w3-text-grey">Cafe com leite 3.00</p><br>
-      <p class="w3-text-grey">Cafe gelado com leite 7.00</p><br>
+    <section id="produtos" class="produtos">
+        <h2>Produtos à Venda</h2>
+        <div class="product-list">
+            <div class="product">
+                <img src="./img/x.jpg" alt="Produto 1">
+                <h3>Iphone X 256gb</h3>
+                <p>Preço: R$ 1.399,99</p>
+                <!-- Link para o Mercado Pago -->
+                <a href="https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=ID_DO_PAGAMENTO_DO_MERCADO_PAGO"
+                    target="_blank">
+                    <button>Comprar</button>
+                </a>
+            </div>
+            <div class="product">
+                <img src="./img/Notebook.jpg" alt="Produto 2">
+                <h3>Notebook Gamer 512gb/12 ram</h3>
+                <p>Preço: R$ 2.599,99</p>
+                <!-- Link para o Mercado Pago -->
+                <a href="https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=ID_DO_PAGAMENTO_DO_MERCADO_PAGO"
+                    target="_blank">
+                    <button>Comprar</button>
+                </a>
+            </div>
+            <div class="product">
+                <img src="./img/Fone.jpg" alt="Produto 2">
+                <h3>Fone bluetooth</h3>
+                <p>Preço: R$ 20,99</p>
+                <!-- Link para o Mercado Pago -->
+                <a href="https://www.mercadopago.com.br/checkout/v1/redirect?pref_id=ID_DO_PAGAMENTO_DO_MERCADO_PAGO"
+                    target="_blank">
+                    <button>Comprar</button>
+                </a>
+            </div>
+        </div>
+    </section>
 
-      <h5>Soda</h5>
-      <p class="w3-text-grey">Coca, Sprite, Fanta, etc. 5.00</p>
-    </div>  
-    <img src="https://www.w3schools.com/w3images/coffeehouse2.jpg" style="width:100%;max-width:1000px;margin-top:32px;">
-  </div>
-</div>
+    <section id="servicos" class="servicos">
+        <h2>Serviços de Conserto</h2>
+        <p>Realizamos consertos rápidos e eficientes em diversos tipos de aparelhos eletrônicos, como:</p>
+        <ul>
+            <li>Smartphones</li>
+            <li>Tablets</li>
+            <li>Notebooks</li>
+        </ul>
+    </section>
 
-<!-- Contact/Area Container -->
-<div class="w3-container" id="where" style="padding-bottom:32px;">
-  <div class="w3-content" style="max-width:700px">
-    <h5 class="w3-center w3-padding-48"><span class="w3-tag w3-wide">NOSSO</span></h5>
-    <p>NOSSA LOCALIZACAO AV. PAULISTA MORUM</p>
-    <img src="https://www.w3schools.com/w3images/map.jpg" class="w3-image" style="width:100%">
-    <p><span class="w3-tag">FYI!</span>  Oferecemos serviço completo de catering para qualquer evento, grande ou pequeno. Entendemos suas necessidades e vamos atender a comida para satisfazer os critérios mais amplos de todos, tanto de aparência quanto de sabor.</p>
-    <p><strong>Reserve</strong> uma mesa, peça o especial de hoje ou apenas envie-nos uma mensagem:</p>
-    <form action="/action_page.php" target="_blank">
-      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="How many people" required name="People"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Date and time" required name="date" value="2020-11-16T20:00"></p>
-      <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
-      <p><button class="w3-button w3-black" type="submit">MANDE MANSAGEM</button></p>
-    </form>
-  </div>
-</div>
+    <section id="pix" class="pix">
+        <h2>Pagamento por PIX</h2>
+        <ul>
+            <li>
+                <strong>Número do PIX:</strong>
+                <input type="text" value="17997081907" id="codigoPIX" readonly>
+            </li>
+            <li>
+                <button onclick="copiarPIX()">Copiar Código</button>
+            </li>
+        </ul>
+        <p id="mensagemCopiado">Código copiado com sucesso!</p>
+        <div class="numeroPIX">
+        </div>
+    </section>
 
-<!-- End page content -->
-</div>
+    <section id="contato" class="contato">
+        <h2>Entre em Contato</h2>
+        <p>Preencha o formulário abaixo para agendar um conserto ou tirar dúvidas:</p>
+        <form
+            action="https://wa.me/5517997381476?text=Olá!%20Gostaria%20de%20mais%20informações%20sobre%20os%20produtos%20e%20serviços%20oferecidos."
+            method="GET">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+            <label for="whatsapp">Número do WhatsApp:</label>
+            <input type="text" id="whatsapp" name="whatsapp" required>
+            <br>
+            <button type="submit">Enviar</button>
+            </br>
+        </form>
+    </section>
 
-<!-- Footer. This section contains an ad for W3Schools Spaces. You can leave it to support us. -->
+    <section id="localizacao" class="localizacao">
+        <h2>Localização Atual</h2>
+        <p>Aqui está sua localização atual:</p>
+        <p id="localizacao">Carregando localização...</p>
+        <!-- Espaço para o mapa -->
+        <div id="map" style="height: 400px; width: 100%;"></div>
+    </section>
 
+    <footer>
+        <p>&copy; 2025 Aparelhos Soluções | Todos os direitos reservados</p>
+    </footer>
 
-<script>
-// Tabbed Menu
-function openMenu(evt, menuName) {
-  var i, x, tablinks;
-  x = document.getElementsByClassName("menu");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablink");
-  for (i = 0; i < x.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" w3-dark-grey", "");
-  }
-  document.getElementById(menuName).style.display = "block";
-  evt.currentTarget.firstElementChild.className += " w3-dark-grey";
-}
-document.getElementById("myLink").click();
-</script>
-
+    <!-- Adicione a chave de API do Google Maps -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=obterLocalizacao">
+        </script>
 </body>
-</html>
 
+</html>
