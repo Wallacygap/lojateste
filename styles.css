@@ -1,2 +1,160 @@
-/* Replace with your CSS Code 
-(Leave empty if not needed) */    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background: #333;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+section {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.home {
+    background-color: #fff;
+    margin-bottom: 40px;
+}
+
+.produtos {
+    background-color: #e9ecef;
+    margin-bottom: 40px;
+}
+
+.produtos .product-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.produtos .product {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 250px;
+}
+
+.produtos .product img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.servicos ul {
+    list-style: none;
+    padding: 0;
+}
+
+.servicos ul li {
+    margin-bottom: 10px;
+}
+
+.contato form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contato label {
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.contato input,
+.contato textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Remover a borda do campo de entrada do código PIX */
+#codigoPIX {
+    border: transparent;
+    background-color: transparent;
+    font-size: 16px;
+    padding: 5px;
+    width: 250px;
+    /* Ajuste o tamanho do campo de entrada conforme necessário */
+    word-wrap: break-word;
+    /* Para evitar a barra de rolagem */
+    overflow: hidden;
+    /* Para garantir que não apareça a barra de rolagem */
+}
+
+/* Estilo para o botão de cópia */
+button {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Estilo para a mensagem "copiado com sucesso" */
+#mensagemCopiado {
+    display: none;
+    color: green;
+    font-weight: bold;
+}
